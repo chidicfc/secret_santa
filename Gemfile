@@ -7,3 +7,4 @@ gem 'pg'
 gem "sequel"
 gem 'pry'
 gem "pry-remote"
+gem 'sinatra-flash'
