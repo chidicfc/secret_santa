@@ -11,5 +11,13 @@ class User
     user
   end
 
+  class Repository
+
+    def initialize
+      @datastore = DataBaseDataStore.new
+    end
+
+  end
+
 
 end

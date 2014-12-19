@@ -13,3 +13,7 @@ DB.create_table? :logins do
   String :name
   String :password
 end
+
+class DataBaseDataStore
+
+end

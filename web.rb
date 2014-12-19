@@ -12,10 +12,12 @@ get "/" do
 end
 
 post '/login' do
-  if params[:action] == "Log in"
-
-
+  
+  if params[:name].empty? || params[:password].empty?
+    flash[:error] = "Name or Password should not be empty"
+    redirect '/'
   else
 
   end
+
 end
