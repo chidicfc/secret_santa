@@ -12,12 +12,15 @@ get "/" do
 end
 
 post '/login' do
-  
-  if params[:name].empty? || params[:password].empty?
-    flash[:error] = "Name or Password should not be empty"
-    redirect '/'
-  else
 
+  view = UserView.new params[:name], params[:password]
+  controller = UserController.new view
+  unless controller.isUser?
+    
+  else
+    flash[:error] = "Unauthorised access"
+    redirect "/"
   end
+
 
 end

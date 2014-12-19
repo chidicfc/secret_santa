@@ -17,6 +17,11 @@ class User
       @datastore = DataBaseDataStore.new
     end
 
+    def check user
+      @datastore.check user
+    end
+    
+
   end
 
 

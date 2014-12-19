@@ -8,12 +8,16 @@ configure :development do
 end
 
 
-DB.create_table? :logins do
+DB.create_table? :users do
   primary_key :id
   String :name
   String :password
 end
 
 class DataBaseDataStore
+
+  def check user
+    DB[:users].where(:name => user.name, :password => user.password).all.empty?
+  end
 
 end
