@@ -12,7 +12,7 @@ get '/' do
 end
 
 post '/login' do
-
+  raise
   view = UserView.new params[:name], params[:password]
   controller = UserController.new view
   unless controller.isUser?
