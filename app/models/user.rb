@@ -20,7 +20,11 @@ class User
     def check user
       @datastore.check user
     end
-    
+
+    def play_secret_santa user
+      @datastore.play_secret_santa user
+    end
+
 
   end
 

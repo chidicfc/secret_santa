@@ -17,6 +17,7 @@ post '/login' do
   controller = UserController.new view
   unless controller.isUser?
     session[:user] = view
+    session[:authenticated] = true
     redirect "/secret-santa"
   else
     flash[:error] = "Unauthorised access"
@@ -25,5 +26,22 @@ post '/login' do
 end
 
 get '/secret-santa' do
-  erb :secret_santa
+  if session[:authenticated]
+    erb :secret_santa
+  else
+    flash[:error] = "Unauthorised access"
+    redirect "/"
+  end
+end
+
+post '/secret-santa' do
+  if session[:authenticated]
+    @view = SecretSantaView.new
+    @controller = SecretSantaController.new @view
+    @controller.play_secret_santa session[:user]
+    erb :result
+  else
+    flash[:error] = "Unauthorised access"
+    redirect "/"
+  end
 end
