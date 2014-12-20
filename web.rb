@@ -39,9 +39,14 @@ post '/secret-santa' do
     @view = SecretSantaView.new
     @controller = SecretSantaController.new @view
     @controller.play_secret_santa session[:user]
+    session.clear
     erb :result
   else
     flash[:error] = "Unauthorised access"
     redirect "/"
   end
+end
+
+get '/logout' do
+  redirect "/"
 end
