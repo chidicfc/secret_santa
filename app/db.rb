@@ -7,6 +7,11 @@ configure :development do
   set :environment, :development
 end
 
+configure :production do
+  DB = Sequel.connect('postgres://fsztkkadegulcc:7s33H7Ajn0Rq9b5lHbUzhtvmvv@ec2-54-235-76-206.compute-1.amazonaws.com:5432/ddelo4rm6e49aj')
+  set :environment, :production
+end
+
 
 DB.create_table? :users do
   primary_key :id
