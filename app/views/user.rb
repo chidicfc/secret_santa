@@ -1,9 +1,7 @@
 class UserView
-  attr_accessor :name, :password
+  attr_accessor :name
 
-  def initialize name, password
-    @name = name
-    @password = password
-  end
-
+    def initialize name
+      @name = name
+    end
 end

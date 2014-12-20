@@ -1,13 +1,12 @@
 class User
-  attr_accessor :name, :password
+  attr_accessor :name
 
-  def initialize (name, password)
+  def initialize name
     @name = name
-    @password = password
   end
 
   def self.from_hash(row)
-    user = User.new row[:name], row[:password]
+    user = User.new row[:name]
     user
   end
 
@@ -17,13 +16,14 @@ class User
       @datastore = DataBaseDataStore.new
     end
 
-    def check user
-      @datastore.check user
+    def play_secret_santa
+      @datastore.play_secret_santa
     end
 
-    def play_secret_santa user
-      @datastore.play_secret_santa user
+    def delete user
+      @datastore.delete user
     end
+
 
 
   end

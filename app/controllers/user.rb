@@ -6,10 +6,11 @@ class UserController
     @repo = User::Repository.new
   end
 
-  def isUser?
-    @repo.check @view
+  def play_secret_santa
+    @view.name = @repo.play_secret_santa
   end
 
-
-
+  def delete user
+    @repo.delete user
+  end
 end

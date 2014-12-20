@@ -16,27 +16,36 @@ end
 DB.create_table? :users do
   primary_key :id
   String :name
+end
+
+DB.create_table? :logins do
+  primary_key :id
+  String :name
   String :password
 end
 
 class DataBaseDataStore
 
-  def check user
-    DB[:users].where(:name => user.name, :password => user.password).all.empty?
+  def check login
+    DB[:logins].where(:name => login.name, :password => login.password).all.empty?
   end
 
-  def play_secret_santa user
+  def play_secret_santa
     names = []
     DB[:users].each do |user_row|
       user_object = User.from_hash(user_row)
       names << user_object.name
     end
     names
-    DB.transaction do
-      DB[:users].where(:name => user.name).delete
-      names.delete("#{user.name}")
-    end
     names.sample
+  end
+
+  def delete user
+    DB[:users].where(:name => user.name).delete
+  end
+
+  def delete_login login
+    DB[:logins].where(:name => login.name, :password => login.password).delete
   end
 
 end

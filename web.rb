@@ -12,10 +12,10 @@ get '/' do
 end
 
 post '/login' do
-  view = UserView.new params[:name], params[:password]
-  controller = UserController.new view
+  view = LoginView.new params[:name], params[:password]
+  controller = LoginController.new view
   unless controller.isUser?
-    session[:user] = view
+    session[:login] = view
     session[:authenticated] = true
     redirect "/secret-santa"
   else
@@ -35,9 +35,14 @@ end
 
 post '/secret-santa' do
   if session[:authenticated]
-    @view = SecretSantaView.new
-    @controller = SecretSantaController.new @view
-    @controller.play_secret_santa session[:user]
+    @view = UserView.new session[:login].name
+    @controller = UserController.new @view
+    @controller.play_secret_santa
+    while @view.name == session[:login].name do
+      @controller.play_secret_santa
+    end
+    LoginController.new.delete session[:login]
+    @controller.delete @view
     session.clear
     erb :result
   else
